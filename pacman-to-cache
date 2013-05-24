@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+# XXX header GPL
+
+if [[ -z $PACMAN_TO_CACHE_DB ]]; then
+	PACMAN_TO_CACHE_DB="${TMPDIR:-/tmp}/pacman-to-cache-db-${USER}/"
+fi
+
+trap 'rm -f $PACMAN_TO_CACHE_DB/db.lck' INT TERM EXIT
+
+DBPath="${DBPath:-/var/lib/pacman/}"
+eval $(awk -F' *= *' '$1 ~ /DBPath/ { print $1 "=" $2 }' /etc/pacman.conf)
+CacheDir="${CacheDir:-/var/lib/pacman/}"
+eval $(awk -F' *= *' '$1 ~ /CacheDir/ { print $1 "=" $2 }' /etc/pacman.conf)
+
+mkdir -p "$PACMAN_TO_CACHE_DB"
+ln -s "${DBPath}/local" "$PACMAN_TO_CACHE_DB" &> /dev/null
+
+pacman -Syuw --noconfirm --dbpath "$PACMAN_TO_CACHE_DB" --cachedir "$CacheDir" --logfile /dev/null >/dev/null
+
+# vim: set ts=2 sw=2 noet:
