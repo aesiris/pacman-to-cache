@@ -1,16 +1,33 @@
 #!/usr/bin/bash
-
-# XXX header GPL
+#
+#   pacman-to-cache: Download updates to pacman cache.
+#
+#   based on checkupdates: Safely print a list of pending updates.
+#   Copyright (c) 2013 Kyle Keen <keenerd@gmail.com>
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 if [[ -z $PACMAN_TO_CACHE_DB ]]; then
-	PACMAN_TO_CACHE_DB="${TMPDIR:-/tmp}/pacman-to-cache-db-${USER}/"
+	PACMAN_TO_CACHE_DB="${TMPDIR:-/tmp}/pacman-to-cache-db/"
 fi
 
 trap 'rm -f $PACMAN_TO_CACHE_DB/db.lck' INT TERM EXIT
 
 DBPath="${DBPath:-/var/lib/pacman/}"
 eval $(awk -F' *= *' '$1 ~ /DBPath/ { print $1 "=" $2 }' /etc/pacman.conf)
-CacheDir="${CacheDir:-/var/lib/pacman/}"
+CacheDir="${CacheDir:-/var/cache/pacman/pkg/}"
 eval $(awk -F' *= *' '$1 ~ /CacheDir/ { print $1 "=" $2 }' /etc/pacman.conf)
 
 mkdir -p "$PACMAN_TO_CACHE_DB"

@@ -9,7 +9,6 @@ arch=('any')
 license=('GPL')
 depends=('')
 makedepends=('git')
-backup=('')
 source=("git://github.com/aesiris/${_pkgname}#tag=${pkgver}")
 sha256sums=('SKIP')
 
