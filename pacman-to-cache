@@ -19,9 +19,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-if [[ -z $PACMAN_TO_CACHE_DB ]]; then
-	PACMAN_TO_CACHE_DB="${TMPDIR:-/tmp}/pacman-to-cache-db/"
-fi
+: ${PACMAN_TO_CACHE_DB:="/run/pacman-to-cache-db/"}
 
 trap 'rm -f $PACMAN_TO_CACHE_DB/db.lck' INT TERM EXIT
 
