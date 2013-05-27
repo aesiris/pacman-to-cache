@@ -1,0 +1,8 @@
+[Unit]
+PartOf=pacman-to-cache.service
+
+[Timer]
+OnActiveSec=10m
+
+[Install]
+WantedBy=multi-user.target
