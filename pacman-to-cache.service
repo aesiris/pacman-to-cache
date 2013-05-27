@@ -3,5 +3,4 @@ Description=Download updates to pacman cache
 After=local-fs.target network.target
 
 [Service]
-Type=oneshot
 ExecStart=/usr/bin/pacman-to-cache
