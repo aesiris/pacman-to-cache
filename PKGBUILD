@@ -2,7 +2,7 @@
 
 _pkgname='pacman-to-cache'
 pkgname='pacman-to-cache'
-pkgver=0.1.1
+pkgver=0.2
 pkgrel=1
 pkgdesc='Service to automatically download updates into pacman cache'
 arch=('any')
@@ -16,6 +16,7 @@ package() {
 	cd "$srcdir/${_pkgname}"
 	install -Dm755 "$pkgname" "$pkgdir/usr/bin/$pkgname"
 	install -Dm644 "$pkgname.service" "$pkgdir/usr/lib/systemd/system/$pkgname.service"
+	install -Dm644 "$pkgname.timer" "$pkgdir/usr/lib/systemd/system/$pkgname.timer"
 
 	#gzip -9 man.manpage
 	#install -Dm 0644 man.manpage.gz "$pkgdir/usr/share/man/man1/$pkgname.1.gz"
