@@ -2,7 +2,7 @@
 
 _pkgname='pacman-to-cache'
 pkgname='pacman-to-cache'
-pkgver=0.1
+pkgver=0.1.1
 pkgrel=1
 pkgdesc='Service to automatically download updates into pacman cache'
 arch=('any')
