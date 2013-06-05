@@ -1,6 +1,7 @@
 [Unit]
 Description=Download updates to pacman cache
 After=local-fs.target network.target
+ConditionFileNotEmpty=!/var/lib/pacman/db.lck
 
 [Service]
 ExecStart=/usr/bin/pacman-to-cache
